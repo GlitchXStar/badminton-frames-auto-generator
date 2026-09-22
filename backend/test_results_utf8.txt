@@ -1,0 +1,63 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.12.0, pytest-8.3.4, pluggy-1.6.0 -- D:\Badminton_Shoe_Detection\badminton-dataset-generator\backend\venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: D:\Badminton_Shoe_Detection\badminton-dataset-generator\backend
+plugins: anyio-4.15.1, asyncio-0.25.0
+asyncio: mode=Mode.STRICT, asyncio_default_fixture_loop_scope=None
+collecting ... collected 17 items
+
+tests/test_health.py::test_health_endpoint PASSED                        [  5%]
+tests/test_health.py::test_swagger_docs PASSED                           [ 11%]
+tests/test_health.py::test_openapi_json PASSED                           [ 17%]
+tests/test_projects.py::test_create_project PASSED                       [ 23%]
+tests/test_projects.py::test_create_duplicate_project PASSED             [ 29%]
+tests/test_projects.py::test_list_projects PASSED                        [ 35%]
+tests/test_projects.py::test_get_project PASSED                          [ 41%]
+tests/test_projects.py::test_get_nonexistent_project PASSED              [ 47%]
+tests/test_projects.py::test_project_validation PASSED                   [ 52%]
+tests/test_utils.py::test_sanitize_filename FAILED                       [ 58%]
+tests/test_utils.py::test_path_safety PASSED                             [ 64%]
+tests/test_utils.py::test_ensure_unique_path PASSED                      [ 70%]
+tests/test_utils.py::test_url_validation PASSED                          [ 76%]
+tests/test_utils.py::test_exact_duplicate_detection PASSED               [ 82%]
+tests/test_utils.py::test_selection_diversity PASSED                     [ 88%]
+tests/test_utils.py::test_selection_insufficient_candidates PASSED       [ 94%]
+tests/test_utils.py::test_selection_summary PASSED                       [100%]
+
+================================== FAILURES ===================================
+___________________________ test_sanitize_filename ____________________________
+
+    def test_sanitize_filename():
+        """Test filename sanitization."""
+        assert sanitize_filename("hello world.jpg") == "hello world.jpg"
+        assert sanitize_filename("../../../etc/passwd") == "______etc_passwd"
+        assert sanitize_filename('file<>:"/\\|?*.jpg') == "file_________.jpg"
+        assert sanitize_filename("") == "unnamed"
+>       assert sanitize_filename("...") == "unnamed"
+E       AssertionError: assert '_' == 'unnamed'
+E         
+E         - unnamed
+E         + _
+
+tests\test_utils.py:17: AssertionError
+============================== warnings summary ===============================
+venv\Lib\site-packages\starlette\testclient.py:40
+  D:\Badminton_Shoe_Detection\badminton-dataset-generator\backend\venv\Lib\site-packages\starlette\testclient.py:40: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = typing.Callable[[], typing.ContextManager[anyio.abc.BlockingPortal]]
+
+venv\Lib\site-packages\pydantic\_internal\_config.py:295
+venv\Lib\site-packages\pydantic\_internal\_config.py:295
+venv\Lib\site-packages\pydantic\_internal\_config.py:295
+venv\Lib\site-packages\pydantic\_internal\_config.py:295
+venv\Lib\site-packages\pydantic\_internal\_config.py:295
+  D:\Badminton_Shoe_Detection\badminton-dataset-generator\backend\venv\Lib\site-packages\pydantic\_internal\_config.py:295: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.10/migration/
+    warnings.warn(DEPRECATION_MESSAGE, DeprecationWarning)
+
+tests/test_projects.py: 10 warnings
+  D:\Badminton_Shoe_Detection\badminton-dataset-generator\backend\venv\Lib\site-packages\sqlalchemy\sql\schema.py:3596: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    return util.wrap_callable(lambda ctx: fn(), fn)  # type: ignore
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_utils.py::test_sanitize_filename - AssertionError: assert '...
+================== 1 failed, 16 passed, 16 warnings in 0.59s ==================

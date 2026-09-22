@@ -1,0 +1,48 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+
+# Data (large files)
+data/videos/
+data/frames/
+data/selected/
+data/rejected/
+data/exports/
+*.mp4
+*.avi
+*.mkv
+
+# Keep data directory structure
+!data/.gitkeep
+!data/projects/.gitkeep
+
+# Database
+*.db
+*.db-wal
+*.db-shm
+
+# Environment
+.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Next.js
+.next/
+out/
+
+# Build
+dist/
+build/
